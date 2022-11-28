@@ -9,6 +9,7 @@ import { persistReducer,
 import storage from 'redux-persist/lib/storage';
 import accountSlice from './accountSlice';
 import { persistStore } from 'redux-persist';
+import clubSlice from './clubSlice';
 
 
 const persistConfig = {
@@ -18,6 +19,7 @@ const persistConfig = {
 
 let rootReducer = combineReducers({
     account: accountSlice.reducer,
+    club: clubSlice.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);	// redux-persist

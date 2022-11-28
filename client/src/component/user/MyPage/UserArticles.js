@@ -31,8 +31,8 @@ const UserArticles =()=>{
         header={<div>Header</div>}
         footer={<div>Footer</div>}
         
-        dataSource={data}
-        renderItem={(item) => <List.Item style={{border:"1px solid gray"}}>{item}</List.Item>}
+        dataSource={articles}
+        renderItem={(item) => <List.Item style={{border:"1px solid gray"}} >title:{item.title} content:{item.content}</List.Item>}
         />
     );    
 };

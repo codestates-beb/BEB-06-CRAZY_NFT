@@ -1,7 +1,7 @@
-import {Layout,Card} from "antd";
+import {Layout} from "antd";
 import { UserMenu,UserInfo,UserArticles,UserNfts,UserClub } from "../../component";
 import React,{ useState } from 'react';
-const { Meta } = Card;
+
 const { Header, Footer, Sider, Content } = Layout;
 
 

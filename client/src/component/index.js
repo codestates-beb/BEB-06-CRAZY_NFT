@@ -9,3 +9,4 @@ export { default as UserClub } from './user/MyPage/UserClub';
 export { default as AdminMenu } from './user/MyPage/AdminMenu';
 export { default as ClubEntryList } from './user/MyPage/ClubEntryList';
 export { default as Catagory } from './club/ClubMain/Catagory';
+export { default as Articles } from './club/ClubMain/Articles';

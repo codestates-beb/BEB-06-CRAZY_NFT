@@ -1,6 +1,7 @@
 import { AppstoreOutlined, UserOutlined, SolutionOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 function getItem(label, key, icon, children, type) {
     return {
       key,
@@ -18,17 +19,17 @@ const items = [
 ];
 
 const UserMenu =({selectMenu})=>{
-    
+    const navigate=useNavigate();
     const onClick = (e) => {
       selectMenu(e.key);
     };
     return (
       <>
-      <div style={{float: "left",width: "120px",height: "31px",margin: "16px 24px 16px 0",background: "rgba(255, 255, 255, 0.3)"}} />
+      <div onClick={()=>navigate('/')} style={{float: "left",width: "120px",height: "31px",margin: "16px 24px 16px 0",background: "rgba(255, 255, 255, 0.3)"}} />
       <Menu
         onClick={onClick}
         style={{
-          background:"#9747FF",
+          background:"white",
           
         }}
         defaultSelectedKeys={['info']}

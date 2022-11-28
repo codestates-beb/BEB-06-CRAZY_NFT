@@ -2,36 +2,39 @@ import React,{ useState } from 'react';
 import { Layout } from 'antd';
 import {  Route, Routes } from 'react-router-dom';
 import {ArticleDetail,CreateArticle} from "../../pages";
-import { Catagory } from '../../component';
+import { Catagory ,Articles} from '../../component';
+import { useSelector } from 'react-redux';
 const { Header, Sider, Content } = Layout;
 
 const ClubMain =()=>{
-    const [catagory,setCatagory]=useState("all");
+    
+    const {catagory,catagoryId}=useSelector((state) =>{
+        return state.club;
+      });
     const statusIcon = {
-        all: <div>all</div>,
-        notice: <div>notice</div>,
-        qna: <div>qna</div>,
-        free: <div>free</div>,
-        club: <div>club</div>,
-        rare: <div>rare</div>,
-        superrare: <div>superrare</div>,
+        all: <div>{catagoryId}</div>,
+        notice: <div>{catagoryId}</div>,
+        qna: <div>{catagoryId}</div>,
+        free: <div>{catagoryId}</div>,
+        club: <div>{catagoryId}</div>,
+        rare: <div>{catagoryId}</div>,
+        superrare: <div>{catagoryId}</div>,
     }
     const StatusIconComponent = statusIcon[catagory];
-    const selectCatagory=(menu)=>{
-        setCatagory(menu);
-    }
     return (
         <Layout>
             <Header>Header</Header>
             <Layout>
                 <Sider style={{height:"80vh",background:"#9747FF"}}>
-                <Catagory selectCatagory={selectCatagory} />
+                <Catagory  />
                 </Sider>
+                <Content>
                 <Routes>
-                    <Route path="*" element={<Content>{StatusIconComponent}</Content>} />
+                    <Route path="*" element={<Articles />} />
                     <Route path="articledetail/:id" element={<ArticleDetail />} />
                     <Route path="createarticle" element={<CreateArticle />} />
                 </Routes>
+                </Content>
             </Layout>
         </Layout>
     );
