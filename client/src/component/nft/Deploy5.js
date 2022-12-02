@@ -36,7 +36,12 @@ const Deploy5 =()=>{
       <form encType="multipart/form-data" onSubmit={upload}>
         <div className="w-full text-center mt-4 font-bold">
           <span className="text-4xl text-red-700">
-            background를 업로드하세요!
+            제일 위 레이아웃인 이미지 업로드하세요!
+            <div style={{color:"red"}}>
+              <div>!주의!</div>
+              <div>한번 업로드가 되면 다시 업로드 시킬수 없습니다.</div>
+              <div>다음 단계로 넘어 갈시에도 이전 단계로 되돌릴수 없습니다.</div>
+            </div>
           </span>
         </div>
         <input type="file" name="file" multiple webkitdirectory="true" />

@@ -24,6 +24,7 @@ const nftSlice = createSlice({
   initialState,
   reducers: {
     selectNft: (state, action) => {
+      console.log(action.payload.meta);
       state.meta = action.payload.meta;
     },
     

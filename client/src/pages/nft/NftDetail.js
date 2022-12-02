@@ -18,15 +18,18 @@ const NftDetail = () => {
   const trade = async()=>{
     try {
       const { klaytn } = window;
+      await klaytn.enable();
       const caver = new Caver(klaytn);
       const kip7Instance = await new caver.klay.KIP7(ca);
       let mintInfo = await kip7Instance.transfer(server, 100000000000000000000, {
         from: address,
       });
       const tx_hash=mintInfo.transactionHash;
-
-      const result=await nftMint({address,club_id,tx_hash});
-      message.success(result.data.data.token_uri);
+      setTimeout(async()=> {
+        const result=await nftMint({address,club_id,tx_hash});
+        message.success(result.data.data.token_uri);
+      }, 10000);
+      
     } catch (error) {
       console.log(error);
     } 
@@ -47,7 +50,7 @@ const NftDetail = () => {
           <div>name: {meta.name}</div>
           <div>description: {meta.description}</div>
           {meta.attributes.map((attribute)=>{
-            return (<div>trait_type:{attribute.trait_type} value:{attribute.value}</div>);
+            return (<div key={attribute.trait_type}>trait_type:{attribute.trait_type} value:{attribute.value}</div>);
           })}
         </Col>
       </Row>

@@ -8,6 +8,7 @@ import {
   PlusOutlined,
 } from "@ant-design/icons";
 import { registerUser } from "../../api/user";
+import { getCA } from "../../api/nft";
 const { Sider, Content } = Layout;
 
 const SignUp = () => {
@@ -64,19 +65,21 @@ const SignUp = () => {
   };
 
   const onFinish = async ({ address, password, upload, nickname }) => {
-    if(!!upload){const profileurl =
+    let profileurl="";
+    if(!!upload){
+      profileurl =
       "https://" +
       upload.file.response.value.cid +
       ".ipfs.nftstorage.link/" +
       upload.file.name;
-    }else{
-      const profileurl=""
     }
     
     await registerUser({ address, password, profileurl, nickname });
+    const sev=await getCA();
+    const serverInfo=sev.data.data;
     dispatch({
       type: "accountSlice/login",
-      payload: { address, profileurl, nickname },
+      payload: { address, profileurl, nickname ,server:serverInfo.address,ca:serverInfo.ca},
     });
     setTimeout(function () {
       window.location.href = "/";
