@@ -34,7 +34,7 @@ const ArticleDetail =()=>{
     };
     useEffect(() => {
         fetchData();
-    });
+    },[]);
 
     const clickLike=async()=>{
         try {

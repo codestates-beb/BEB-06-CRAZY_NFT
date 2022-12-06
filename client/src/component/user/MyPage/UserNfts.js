@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { myNft } from "api/my";
 import { List, AutoComplete, Input, Card } from "antd";
+import axios from "axios";
 const { Meta } = Card;
 
 const getRandomInt = (max, min = 0) =>
@@ -44,12 +45,26 @@ const UserNfts = () => {
   useEffect(() => {
     const fetchData = async () => {
       const info = await myNft(address);
-      setNfts(info.data.data.my_nft);
-      console.log("nfts", nfts);
+      const nfts=info.data.data.my_nft;
+      const jsondata=[];
+      for(const nft of nfts){
+        try {
+          let meta=await axios(`https://ipfs.io/ipfs/${nft.NFT.metaCid}/${nft.NFTId}.json`);
+          let img=meta.data.image.replace("ipfs://","https://ipfs.io/ipfs/");
+          console.log(img);
+          jsondata.push({...meta.data,address:nft.address,image:img});
+        } catch (err) {
+          console.log(err);
+        }
+        
+      }
+      console.log(jsondata);
+      setNfts(jsondata);
+      console.log("nfts");
     };
 
     fetchData();
-  }, [address, nfts]);
+  }, [address]);
 
   const [options, setOptions] = useState([]);
   const handleSearch = (value) => {
@@ -86,10 +101,10 @@ const UserNfts = () => {
               <Card
                 hoverable
                 cover={
-                  <img style={{ height: "200px" }} alt="nft" src={item.img} />
+                  <img style={{ height: "200px" }} alt="nft" src={item.image} />
                 }
               >
-                <Meta title={item.title} description="www.instagram.com" />
+                <Meta title={item.name} description={item.description} />
               </Card>
             </List.Item>
           </>

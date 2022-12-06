@@ -35,8 +35,8 @@ const ClubEntryList = () => {
 
   const acceptEntry = async (id, userAddress, clubId) => {
     try {
-      await clubEntry(userAddress, clubId);
-      console.log("test", userAddress, clubId);
+      await clubEntry(address, clubId);
+      console.log("test", address, clubId);
       message.success("승인 됐습니다");
       //제거
       setEntry(entry.filter((el) => el.id !== id));

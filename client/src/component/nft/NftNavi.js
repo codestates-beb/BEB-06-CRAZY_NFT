@@ -47,9 +47,14 @@ const Navi =({search})=>{
         setTimeout(async()=> {
           const result=await nftMint({address,club_id,tx_hash});
           message.success(result.data.data.token_uri);
-        }, 10000);
+        }, 30000);
       } catch (error) {
-        message.error("민팅에 실패 했습니다.");
+        console.log(error);
+        if(error.message==="Internal JSON-RPC error."){
+          message.error("토큰이 부족합니다.");
+        }else{
+          message.error(error.message);
+        }
       }
     };
 

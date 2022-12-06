@@ -28,6 +28,7 @@ const NftMint = () => {
   const deployNft = async (value) => {
     console.log(value);
     try {
+      message.loading("발행 중 입니다.");
       const nfts=await nftDeploy({
         club_id: clubId,
         nft_name: value.nft_name,
@@ -36,6 +37,7 @@ const NftMint = () => {
         nft_price: Number(value.nft_price), // 100 PCT
         deploy_count: Number(value.deploy_count),
       });
+      
       console.log(nfts);
       message.success("발행 성공");
     } catch (error) {
