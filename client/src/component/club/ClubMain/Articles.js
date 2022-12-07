@@ -1,4 +1,4 @@
-import { Table, Button,Divider } from "antd";
+import { Table, Button, Divider } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { clubContents } from "api/club";
@@ -15,24 +15,20 @@ title
  */
 const columns = [
   {
-    title: '제목',
-    dataIndex: 'title',
-    key: 'title',
+    title: "제목",
+    dataIndex: "title",
+    key: "title",
   },
   {
-    title: '닉네임',
-    dataIndex: 'User',
-    key: 'User',
-    render:(tags) => (
-      <>
-        {tags.nickname}
-      </>
-    )
+    title: "닉네임",
+    dataIndex: "User",
+    key: "User",
+    render: (tags) => <>{tags.nickname}</>,
   },
   {
-    title: '작성일',
-    dataIndex: 'createdAt',
-    key: 'createdAt',
+    title: "작성일",
+    dataIndex: "createdAt",
+    key: "createdAt",
   },
 ];
 const Articles = () => {
@@ -49,7 +45,7 @@ const Articles = () => {
       console.log(clubId, catagoryId);
       try {
         const result = await clubContents(clubId, catagoryId);
-        const contents=result.data.data;
+        const contents = result.data.data;
         setArticles(contents);
       } catch (error) {
         setArticles([]);
@@ -57,7 +53,7 @@ const Articles = () => {
     };
 
     fetchData();
-  }, [clubId,catagoryId]);
+  }, [clubId, catagoryId]);
 
   const selectArticle = (id) => {
     dispatch({ type: "clubSlice/selectPost", payload: { post_id: id } });
@@ -66,26 +62,26 @@ const Articles = () => {
 
   return (
     <>
-      <div style={{ fontSize: "25px",marginBottom:"10px" }}>
-          {catagory}{" "}
-          <Button
-            onClick={() => navigate(`/clubmain/${clubName}/createarticle`)}
-            icon={<EditOutlined />}
-          >
-            새 글 쓰기
-          </Button>
+      <div style={{ fontSize: "25px", marginBottom: "10px" }}>
+        {catagory}{" "}
+        <Button
+          onClick={() => navigate(`/clubmain/${clubName}/createarticle`)}
+          icon={<EditOutlined />}
+        >
+          새 글 쓰기
+        </Button>
       </div>
       <Divider />
-      <Table onRow={(record) => {
+      <Table
+        onRow={(record) => {
           return {
             onClick: () => selectArticle(record.id), // click row
           };
-          }}
-        columns={columns} 
-        dataSource={articles} 
+        }}
+        columns={columns}
+        dataSource={articles}
       />
     </>
-    
   );
 };
 export default Articles;

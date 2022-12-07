@@ -1,4 +1,4 @@
-import { nft,nftMulti } from "./index";
+import { nft, nftMulti } from "./index";
 /**12. NFT 발행 (Deploy) 요청 
  * {
   “club_id”:<club id>,
@@ -10,7 +10,7 @@ import { nft,nftMulti } from "./index";
 }
 */
 function nftDeploy(info) {
-  return nft.post("deploy",info);
+  return nft.post("deploy", info);
 }
 /**13. NFT 민팅 요청 
  * {
@@ -20,11 +20,11 @@ function nftDeploy(info) {
 }
 */
 function nftMint(info) {
-    return nft.post("mint",info);
+  return nft.post("mint", info);
 }
 /**14. 서버 계정(Account) 및 contract address 요청 */
 function getCA() {
-    return nft.get("address");
+  return nft.get("address");
 }
 /**15. NFT 이미지 생성을 위한 Parts 이미지 upload 요청
  * "club_id":< club id >, 
@@ -36,11 +36,11 @@ img : <parts image>
  */
 
 function imgUpload(formdata) {
-    return nftMulti.post("upload",formdata);
+  return nftMulti.post("upload", formdata);
 }
 /**17. 클럽에서 민팅된 모든  nft 보기 요청 */
 function getClubNfts(cid) {
-    return nftMulti.get(`all/${cid}`);
+  return nftMulti.get(`all/${cid}`);
 }
 
-export { nftDeploy, nftMint, getCA,imgUpload ,getClubNfts};
+export { nftDeploy, nftMint, getCA, imgUpload, getClubNfts };
